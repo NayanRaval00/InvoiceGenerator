@@ -16,7 +16,7 @@ class UserAuthController extends Controller
     public function userLogin(LoginUserRequest $request)
     {
         if (Auth::attempt($request->only('email', 'password'))) {
-            return redirect()->route('dashboard');
+            return redirect()->route('invoice.create');
         }
 
         return back()->withErrors([
@@ -27,6 +27,6 @@ class UserAuthController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-        return redirect()->route('custom.login');
+        return redirect()->route('admin-login');
     }
 }

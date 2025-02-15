@@ -20,6 +20,8 @@ class InvoiceController extends Controller
         $invoice = Invoice::create([
             'customer_name' => $request->customer_name,
             'customer_address' => $request->customer_address,
+            'gst_number' => $request->gst_number,
+            'aadhar_card_number' => $request->aadhar_card_number,
             'date' => Carbon::now()
         ]);
 
@@ -63,5 +65,12 @@ class InvoiceController extends Controller
         $pdf = Pdf::loadView('invoice.pdf', compact('invoice', 'totalBeforeTax', 'cgst', 'sgst', 'totalAfterTax'));
 
         return $pdf->download('invoice_' . $id . '.pdf');
+    }
+
+    /** List Invoices */
+    public function list()
+    {
+        $invoices = Invoice::orderBy('id', 'desc')->paginate(10); 
+        return view('invoice.list', compact('invoices'));
     }
 }

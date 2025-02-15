@@ -24,6 +24,12 @@
                     <span>Create Invoice</span>
                 </a>
             </li>
+            <li>
+                <a href="{{route('invoice.list')}}">
+                    <iconify-icon icon="mage:email" class="menu-icon"></iconify-icon>
+                    <span>List Invoice</span>
+                </a>
+            </li>
         </ul>
     </div>
 </aside>

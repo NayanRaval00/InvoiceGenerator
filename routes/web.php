@@ -15,6 +15,7 @@ Route::middleware(['auth'])->group(function () {
     /**Warehouse creation */
 
     Route::get('/invoice/create', [InvoiceController::class, 'create'])->name('invoice.create');
+    Route::get('/invoice/list', [InvoiceController::class, 'list'])->name('invoice.list');
     Route::post('/invoice/store', [InvoiceController::class, 'store'])->name('invoice.store');
     Route::get('/invoice/{id}', [InvoiceController::class, 'view'])->name('invoice.view'); // Fixed naming inconsistency
     Route::get('/invoice/{id}/pdf', [InvoiceController::class, 'generatePdf'])->name('invoice.pdf'); // Added missing PDF route
