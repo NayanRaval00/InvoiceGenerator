@@ -19,9 +19,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/invoice/store', [InvoiceController::class, 'store'])->name('invoice.store');
     Route::get('/invoice/{id}', [InvoiceController::class, 'view'])->name('invoice.view'); // Fixed naming inconsistency
     Route::get('/invoice/{id}/pdf', [InvoiceController::class, 'generatePdf'])->name('invoice.pdf'); // Added missing PDF route
-    Route::get('show-pdf',function () {
-        return view('invoice.pdf2');
-    });
+    Route::get('show-pdf', [InvoiceController::class, 'dummyPDF']);
+    Route::post('/invoice-delete/{id}', [InvoiceController::class, 'deleteInvoice'])->name('delete-invoice');
 });
 
 /** User Authentication */

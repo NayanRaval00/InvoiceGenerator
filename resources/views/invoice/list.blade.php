@@ -36,11 +36,11 @@
                                     <td>{{ $invoice->created_at->format('d-m-Y') }}</td>
                                     <td>${{ number_format($invoice->total_amount, 2) }}</td>
                                     <td>
-                                        <a href="" class="btn btn-sm btn-info">View</a>
+                                        <a href="{{route('invoice.view',$invoice->id)}}" class="btn btn-sm btn-info">View</a>
                                         <a href="" class="btn btn-sm btn-warning">Edit</a>
-                                        <form action="" method="POST" class="d-inline">
+                                        <form action="{{url('invoice-delete/'.$invoice->id.'')}}" method="post" class="d-inline">
                                             @csrf
-                                            @method('DELETE')
+                                            @method('post')
                                             <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
                                         </form>
                                     </td>

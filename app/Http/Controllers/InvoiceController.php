@@ -70,7 +70,35 @@ class InvoiceController extends Controller
     /** List Invoices */
     public function list()
     {
-        $invoices = Invoice::orderBy('id', 'desc')->paginate(10); 
+        $invoices = Invoice::orderBy('id', 'desc')->paginate(10);
         return view('invoice.list', compact('invoices'));
+    }
+
+    /**
+     * Delete Invoice
+     */
+    public function deleteInvoice($id)
+    {
+        $invoice = Invoice::find($id);
+        if ($invoice) {
+            $invoice->delete();
+            return redirect()->back();
+        }
+
+        return redirect()->back();
+    }
+
+    /**dummy view pdf page */
+
+    public function dummyPDF($id=6)
+    {
+        $invoice = Invoice::with('items')->findOrFail(6);
+
+        $totalBeforeTax = $invoice->items->sum('amount');
+        $cgst = $totalBeforeTax * 0.09;
+        $sgst = $totalBeforeTax * 0.09;
+        $totalAfterTax = $totalBeforeTax + $cgst + $sgst;
+
+        return view('invoice.pdf2', compact('invoice', 'totalBeforeTax', 'cgst', 'sgst', 'totalAfterTax'));
     }
 }
